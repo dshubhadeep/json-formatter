@@ -8,7 +8,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['env', {modules: false}]
+              ['@babel/preset-env', { modules: false }]
             ]
           }
         }
@@ -17,9 +17,20 @@ module.exports = {
         test: /\.scss$/,
         use: [
           'to-string-loader',
-          'css-loader?importLoaders=1',
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 }
+          },
           'postcss-loader',
-          'sass-loader?outputStyle=compressed'
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              sassOptions: {
+                outputStyle: 'compressed',
+              },
+            },
+          }
         ]
       }
     ]
